@@ -10,12 +10,11 @@ namespace Refactoring101
 
     public class QuestionsAndAnswers
     {
-        // 1. Clear Name (Mysterious Name → Intention-Revealing)
-        public double GetMaximum(double first, double second)
+        // 1. Mysterious Name
+        public double Max(double a, double b)
         {
-            return Math.Max(first, second);
+            return a > b ? a : b;
         }
-
         // 2. Remove Duplicate Code
         public void Print()
         {
