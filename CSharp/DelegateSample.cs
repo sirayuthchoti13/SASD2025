@@ -9,6 +9,8 @@ namespace CSharp;
 public class DelegateSample
 {
     delegate void MyDelegate(string name);
+
+    delegate double DelegateDistance();
     public void TestDelegate()
     {
         // Function Pointer 1
@@ -18,6 +20,12 @@ public class DelegateSample
         // Function Pointer 2
         Action<string> func2 = Greeting; // assignment
         func2("Mary"); // calling
+
+        Point p = new Point(3, 4);
+        DelegateDistance func3 = p.GetDistance;
+        double fn3 = func3();
+        Console.WriteLine($"Get Point {fn3}");
+
     }
 
     private void Greeting(string name)

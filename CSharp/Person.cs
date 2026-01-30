@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CSharp;
 /*public class Person
 {
-    private string name = "";
+    private string name = ""; //private string name; (backing field)
     public string Name
     {
         get { return name; }

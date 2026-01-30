@@ -12,13 +12,31 @@ public class Examples
     {
         VarTest();                  // 1
         StringInterpolation();      // 2
-        //var d = GetDistance(3, 4);  // 3
+        var d = GetDistance(3, 4);  // 3
         //TestCollection();           // 4
-        //TestPerson();               // 5
-        //TestCustomer();             // 6
+        TestPerson();               // 5
+        TestCustomer();             // 6
         //TestDelegate();             // 7
         //ExtensionMethod();          // 8
         //Nullable();                 // 9
+        
+        Exercise();
+    }
+
+    void Exercise()
+    {
+        int a = 12345;
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine("Exercise: Sirayuth Chotithammaporn 66102010153");
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine($"ข้อ2");
+        Console.WriteLine($"|{a,10:N0}|");
+        Console.WriteLine($"|{a,10:D8}|");
+        Console.WriteLine($"ข้อ5");
+        Console.WriteLine($"|Person1 และ Person3 เป็น read-only property ในมุมมองผู้ใช้|");
+        ExtensionMethod();
+        TestDelegate();
+        Nullable();
     }
 
     // 1. var
@@ -50,10 +68,7 @@ public class Examples
     }
 
     // 3.
-    static double GetDistance(double x, double y)
-    {
-        return Math.Sqrt(x * x + y * y);
-    }
+    static double GetDistance(double x, double y) => Math.Sqrt(x * x + y * y);
 
     // 4. 
     void TestCollection()
@@ -95,15 +110,28 @@ public class Examples
     }
 
     // 6.
+    //void TestCustomer()
+    //{
+    //    Customer cust = new()
+    //    {
+    //        Name = "John",
+    //        Order = new()
+    //        {
+    //            new() {Name = "Noodle", Price = 40.5m},
+    //            new() {Name = "Potato", Price = 32.0m},
+    //        }
+    //    };
+    //}
     void TestCustomer()
     {
         Customer cust = new()
         {
             Name = "John",
+            Age = 35,
             Order = new()
             {
-                new() {Name = "Noodle", Price = 40.5m},
-                new() {Name = "Potato", Price = 32.0m},
+                new Product("Noodle", 40.5m),
+                new Product("Potato", 32.0m)
             }
         };
     }
@@ -111,27 +139,41 @@ public class Examples
     // 7.
     void TestDelegate()
     {
+        Console.WriteLine("--------------------------------");
+        Console.WriteLine("Delegate Variable");
         new DelegateSample().TestDelegate();
     }
 
     // 8.
     void ExtensionMethod()
     {
+        Console.WriteLine("--------------------------------");
+        Console.WriteLine("Extension Method");
         // เรียกแบบ Utility Method ปกติ
         Console.WriteLine(StringUtil.Half("Hello World, John."));
 
         // เรียกแบบ Extension Method
         Console.WriteLine("Hello World, John.".Half());
+
+        Console.WriteLine(StringUtil.SecondHalf("Hello World, John."));
+        Console.WriteLine("Hello World, John.".SecondHalf());
     }
 
     // 9.
     static void Nullable()
     {
         int? a = null;
+        Console.WriteLine("--------------------------------");
+        Console.WriteLine("Nullable");
         Console.WriteLine(a > 0);  // false
         Console.WriteLine(a <= 0); // false; ข้อควรระวัง null เทียบกับอะไรก็ได้ false
         Console.WriteLine(a ?? 9999); // ถ้า a เป็น null จะให้ค่า 9999 ออกมา
         a ??= 5; // ถ้า a เป็น null ให้ a มีค่าเท่ากับ 5
         int b = (int)a; // ต้อง explicit casting เป็น (int) ก่อนใช้ในรูป int
+
+        Customer cust1 = null;
+        Customer? cust2 = null;
+        Console.WriteLine(cust1);
+        Console.WriteLine(cust2);
     }
 }
