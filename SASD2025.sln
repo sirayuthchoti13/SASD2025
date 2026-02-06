@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp", "CSharp\CSharp.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Refactoring101", "Refactoring101\Refactoring101.csproj", "{92130139-B1AF-4632-BF81-DBE6FE7D8D65}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassDesign", "ClassDesign\ClassDesign.csproj", "{02D03ADF-610D-4B17-AFEE-1BF48101A16B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{92130139-B1AF-4632-BF81-DBE6FE7D8D65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92130139-B1AF-4632-BF81-DBE6FE7D8D65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92130139-B1AF-4632-BF81-DBE6FE7D8D65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02D03ADF-610D-4B17-AFEE-1BF48101A16B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02D03ADF-610D-4B17-AFEE-1BF48101A16B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02D03ADF-610D-4B17-AFEE-1BF48101A16B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02D03ADF-610D-4B17-AFEE-1BF48101A16B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
