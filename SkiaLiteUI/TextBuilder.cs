@@ -5,13 +5,13 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace SkiaLiteUI;
 
-/*
+
 public class TextBuilder
 {
     public SKFont Font { get; set; }
     public Vector Position { get; set; }
     public SKColor Color { get; set; }
-//    public Vector Step { get; set; }
+    public Vector Step { get; set; }
 
     public TextBuilder(SKFont font, Vector position, SKColor color)
     {
@@ -23,7 +23,7 @@ public class TextBuilder
     public TextWidget Create(string text)
     {
         var widget = new TextWidget(Font, Position, text) { Color = Color };
-//        Position += Step;
+        Position += Step;
         return widget;
     }
-}*/
+}

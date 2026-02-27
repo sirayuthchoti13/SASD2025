@@ -17,8 +17,9 @@ public class TextWidget : Widget //, ICloneable
         Text = text;
     }
 
-    public TextWidget()
+    public TextWidget(SKFont font, Vector position, string text, SKColor color) : this(font, position, text)
     {
+        Color = color;
     }
 
     public override void DrawSelf(SKCanvas canvas)
@@ -27,19 +28,19 @@ public class TextWidget : Widget //, ICloneable
         canvas.DrawShapedText(Text, Position.X, Position.Y,
                                 SKTextAlign.Left, Font, paint);
     }
-// Copy Constructor; Prototype Design Pattern
-/*    public TextWidget(TextWidget sourceObj)
-    {
-        Font = sourceObj.Font;
-        Position = sourceObj.Position;
-        Text = sourceObj.Text;
-        Color = sourceObj.Color;
-    }
+    // Copy Constructor; Prototype Design Pattern
+    /*    public TextWidget(TextWidget sourceObj)
+        {
+            Font = sourceObj.Font;
+            Position = sourceObj.Position;
+            Text = sourceObj.Text;
+            Color = sourceObj.Color;
+        }
 
-    // Clone; Prototype Design Pattern
-    //object ICloneable.Clone() => Clone();
-    public TextWidget Clone() // ไม่ดี เพราะใช้ initializer ต่อเลยไม่ได้
-    {
-        return new TextWidget(this);
-    }*/
+        // Clone; Prototype Design Pattern
+        //object ICloneable.Clone() => Clone();
+        public TextWidget Clone() // ไม่ดี เพราะใช้ initializer ต่อเลยไม่ได้
+        {
+            return new TextWidget(this);
+        }*/
 }

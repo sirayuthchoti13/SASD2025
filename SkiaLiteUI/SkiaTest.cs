@@ -2,6 +2,7 @@
 using System;
 using SkiaSharp;
 using SkiaSharp.HarfBuzz;
+using System.Runtime.Intrinsics.X86;
 
 namespace SkiaLiteUI;
 
@@ -19,20 +20,20 @@ public class SkiaTest : IDisposable, Renderer
 
     public void Init(int ClientSizeX, int ClientSizeY)
     {
-        clientSize = new (ClientSizeX, ClientSizeY);
+        clientSize = new(ClientSizeX, ClientSizeY);
         grgInterface = GRGlInterface.Create();
         grContext = GRContext.CreateGl(grgInterface);
         // Thana: at this point, Skia is linked to current GLContext
         // see: Skia doc. GrDirectContext::MakeGl()
 
         uint rgba8 = 32856; // (uint)SizedInternalFormat.Rgba8
-        renderTarget = new GRBackendRenderTarget(ClientSizeX, ClientSizeY, 0, 8, 
+        renderTarget = new GRBackendRenderTarget(ClientSizeX, ClientSizeY, 0, 8,
                                         new GRGlFramebufferInfo(0, rgba8));
         surface = SKSurface.Create(grContext, renderTarget, GRSurfaceOrigin.BottomLeft, SKColorType.Rgba8888);
 
         Random rand = new Random();
-        for (int i = 0; i < 100; ++i)
-            widgets.Add(RectWidget.CreateRandom(rand, clientSize, new (256, 256)));
+        // for (int i = 0; i < 100; ++i)
+        //     widgets.Add(RectWidget.CreateRandom(rand, clientSize, new (256, 256)));
         AddText();
     }
 
@@ -61,44 +62,54 @@ public class SkiaTest : IDisposable, Renderer
 
     void AddText()
     {
-        
+
         var font = Fonts.GetFromFile(@"Resources\Trirong-Regular.ttf", 40);
+
         var position = new Vector(100, 300);
         var text = "รู้กตัญญูกล้ำกลืนนี้นั้นโน้น abc";
 
-        widgets.Add(new TextWidget(font, position, text));
+        widgets.Add(new TextWidget(font, position, text) { Color = SKColors.Red });
 
-        //BuildText(font);
+        var step = new Vector(0, 40);
+        widgets.Add(new TextWidget(font, position, text, SKColors.Red));
+        position += step;
+        widgets.Add(new TextWidget(font, position, text, SKColors.Green));
+        position += step;
+        widgets.Add(new TextWidget(font, position, text, SKColors.Blue));
+        position += step;
+
+        BuildText(font);
         //CloneText(font);
     }
 
     // Builder design pattern
-/*    private void BuildText(SKFont font)
+    private void BuildText(SKFont font)
     {
         var step = new Vector(0, 40);
-        var builder = new TextBuilder(font, new(50, 50), SKColors.Blue);
-
+        var builder = new TextBuilder(font, new(50, 50), SKColors.Blue)
+        { Step = new(40, 40) };
         for (int i = 0; i < 5; i++)
         {
-            widgets.Add(builder.Create("ทดสอบข้อความ " + i));
-            builder.Position += step;
+            builder.Color = GlobalRandom.Obj.NextColor();
+            widgets.Add(builder.Create("153 Sirayuth Chotithammaporn  " + i));
+
         }
-    }*/
+    }
 
     // Prototype design pattern
-/*    private void CloneText(SKFont font)
-    {
-        string text = "ทดสอบข้อความ prototype ";
-        var prototype = new TextWidget(font, new(50, 50), text, SKColors.Blue);
-        for (int i = 0; i < 5; i++)
+    /*    private void CloneText(SKFont font)
         {
-            var widget = new TextWidget(prototype)
+            string text = "ทดสอบข้อความ prototype ";
+            var prototype = new TextWidget(font, new(50, 50), text, SKColors.Blue);
+            for (int i = 0; i < 5; i++)
             {
-                Color = GlobalRandom.Obj.NextColor(),
-                Text = text + i
-            };
-            widgets.Add(widget);
-            prototype.Position += new Vector(0, 40);
-        }
-    }*/
+                var widget = new TextWidget(prototype)
+                {
+                    Color = GlobalRandom.Obj.NextColor(),
+                    Text = text + i
+                };
+                widgets.Add(widget);
+                prototype.Position += new Vector(0, 40);
+            }
+        }*/
 }
