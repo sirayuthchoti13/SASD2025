@@ -10,15 +10,15 @@ public abstract class Widget
     public void AddAction(Action action) => this.action = action;
     public virtual void Act(float deltaTime) { action?.Act(deltaTime); }
 
-    public List<Widget> Children { get; } = new List<Widget>();
+    public List<Widget> Children { get; } = new();
     public virtual void Draw(SKCanvas canvas)
-    {  
-        //ID 235 Chayodom
+    {
+        //Sirayuth 153
         DrawSelf(canvas);
-        for (int i = 0; i<Children.Count; ++i)
+        for(int i=0; i<Children.Count; i++)
             Children[i].Draw(canvas);
     }
-    public virtual void DrawSelf(SKCanvas canvas) { }
+    public abstract void DrawSelf(SKCanvas canvas);
 }
 
 public class RectWidget : Widget
@@ -34,11 +34,10 @@ public class RectWidget : Widget
         Size = size;
     }
 
-    public override void Draw(SKCanvas canvas)
+    public override void DrawSelf(SKCanvas canvas)
     {
         using SKPaint paint = Util.CreatePaint(this.Color);
         canvas.DrawRoundRect(new SKRoundRect((SKRect)this, this.Radius), paint);
-        base.Draw(canvas);
     }
 
     public static explicit operator SKRect(RectWidget r)
@@ -54,11 +53,11 @@ public class RectWidget : Widget
         var widget = new RectWidget(rand.NextVector(max), size)
                             { Color = rand.NextColor() };
         if(GlobalRandom.Obj.Next(2) == 1)
-           widget.AddAction(new RectAnimation(widget));
+            widget.AddAction(new RectAnimation(widget));
 
         widget.Children.Add(new RectWidget(widget.Position, widget.Size / 4));
-        widget.Children.Add(new RectWidget(widget.Position + new Vector(100, 100), widget.Size / 4) { Color = SKColors.Green } );
-
+        widget.Children.Add(new RectWidget(widget.Position + new Vector(100, 100),
+                                            widget.Size / 4) { Color = SKColors.Green });
         return widget;
     }
 }

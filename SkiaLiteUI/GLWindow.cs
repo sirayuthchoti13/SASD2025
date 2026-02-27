@@ -18,7 +18,6 @@ public class GLWindow
     int clientY = 1080;
     Renderer renderer;
 
-
     public GLWindow(string title, int clientX, int clientY, Renderer renderer)
     {
         this.title = title;
@@ -35,8 +34,9 @@ public class GLWindow
         // 2. Create Window
         var window = SDLx.CreateWindow(title, clientX, clientY,
                                 SDL.WindowFlags.HighPixelDensity | 
-                                SDL.WindowFlags.OpenGL | 
-                                SDL.WindowFlags.Borderless);
+                                SDL.WindowFlags.OpenGL // | 
+                                //SDL.WindowFlags.Borderless
+                                );
 
         // https://wiki.libsdl.org/SDL3/README-highdpi
         float scale = SDL.GetWindowPixelDensity(window);
@@ -45,7 +45,6 @@ public class GLWindow
         var context = SDL.GLCreateContext(window);
         SDL.GLMakeCurrent(window, context);
         SDL.GLSetSwapInterval(1); // 1 - VSync On
-
 
         renderer.Init((int)(clientX * scale), (int)(clientY * scale));
 
