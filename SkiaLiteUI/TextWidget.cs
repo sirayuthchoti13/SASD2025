@@ -5,10 +5,21 @@ namespace SkiaLiteUI;
 
 public class TextWidget : Widget //, ICloneable
 {
-    public required SKFont Font { get; set; }
-    public required Vector Position { get; set; }
-    public required string Text { get; set; }
+    public SKFont Font { get; set; }
+    public Vector Position { get; set; }
+    public string Text { get; set; }
     public SKColor Color { get; set; } = SKColors.Black;
+
+    public TextWidget(SKFont font, Vector position, string text)
+    {
+        Font = font;
+        Position = position;
+        Text = text;
+    }
+
+    public TextWidget()
+    {
+    }
 
     public override void DrawSelf(SKCanvas canvas)
     {
